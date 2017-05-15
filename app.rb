@@ -10,7 +10,9 @@ end
 
 post('/add_store') do
   name = params[:name]
-  new_store = Store.create({:name => name})
+  if name != ""
+    new_store = Store.create({:name => name})
+  end
   @stores = Store.all()
   @brands = Brand.all()
   erb(:index)
@@ -19,7 +21,9 @@ end
 post('/add_brand') do
   name = params[:name]
   price = params[:price]
-  new_brand = Brand.create({:name => name, :price => price})
+  if name != "" && price != ""
+    new_brand = Brand.create({:name => name, :price => price})
+  end
   @stores = Store.all()
   @brands = Brand.all()
   erb(:index)

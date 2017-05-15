@@ -35,7 +35,7 @@
       <div class="panel-body">
         <ul>
           <% @brands.each() do |brand| %>
-            <li><a href="/brands/<%= brand.id() %>"><%= brand.name() %></a> <%= brand.price() %></li>
+            <li><a href="/brands/<%= brand.id() %>"><%= brand.name() %></a> <%= "$%.2f"%[brand.price()]%></li>
           <% end %>
         </ul>
         <hr>
