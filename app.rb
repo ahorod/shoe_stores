@@ -32,7 +32,7 @@ end
 get('/stores/:id') do
   id = params.fetch('id').to_i
   @store = Store.find(id)
-  @brands = Brand.all()
+  @brands = Brand.all() - @store.brands()
   erb(:store)
 end
 
@@ -51,7 +51,7 @@ patch('/stores/:id') do
       @store.brands().push(brand)
     end
   end
-  @brands = Brand.all()
+  @brands = Brand.all() - @store.brands()
   erb(:store)
 end
 
@@ -60,6 +60,7 @@ delete('/stores/:id') do
   @store = Store.find(id)
   @store.delete()
   @stores = Store.all()
+  @brands = Brand.all()
   erb(:index)
 end
 
