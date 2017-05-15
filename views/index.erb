@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel-success">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <h4>Stores</h4>
+        </div>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <% @stores.each() do |store| %>
+            <li><a href="/stores/<%= store.id() %>"><%= store.name() %></a></li>
+          <% end %>
+        </ul>
+        <hr>
+        <form action="/add_store" method="post">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input class="form-control" type="text" name="name">
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-success" type="submit">Add Store</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel-warning">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <h4>Brands</h4>
+        </div>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <% @brands.each() do |brand| %>
+            <li><a href="/brands/<%= brand.id() %>"><%= brand.name() %></a> <%= brand.price() %></li>
+          <% end %>
+        </ul>
+        <hr>
+        <form action="/add_brand" method="post">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input class="form-control" type="text" name="name">
+          </div>
+          <div class="form-group">
+            <label for="name">Price</label>
+            <input class="form-control" type="text" name="price">
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-warning" type="submit">Add Brand</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
