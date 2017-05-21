@@ -9,7 +9,7 @@ get('/') do
 end
 
 post('/add_store') do
-  name = params[:name]
+  name = params[:store_name]
   if name != ""
     new_store = Store.create({:name => name})
   end
