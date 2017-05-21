@@ -52,7 +52,7 @@ patch('/stores/:id') do
     end
   end
   @brands = Brand.all() - @store.brands()
-  erb(:store)
+  redirect('/stores/'.concat((@store.id).to_s))
 end
 
 delete('/stores/:id') do
