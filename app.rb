@@ -90,6 +90,7 @@ end
 patch('/brands/:id') do
   id = params.fetch('id').to_i
   name = params.fetch('name')
+  price = params[:price]
   @brand = Brand.find(id)
   if name != ""
     if !@brand.update(:name => name)
@@ -98,5 +99,11 @@ patch('/brands/:id') do
       return erb(:brand)
     end
   end
+
+  if price != ""
+    @brand.update(:price => price)
+  end
+
+
   redirect('/brands/'.concat((@brand.id).to_s))
 end
