@@ -10,23 +10,29 @@ end
 
 post('/add_store') do
   name = params[:store_name]
-  if name != ""
-    new_store = Store.create({:name => name})
+  new_store = Store.new({:name => name})
+  if new_store.save()
+    redirect('/')
+  else
+    @stores = Store.all()
+    @brands = Brand.all()
+    @errors_store = new_store.errors.full_messages
+    erb(:index)
   end
-  @stores = Store.all()
-  @brands = Brand.all()
-  erb(:index)
 end
 
 post('/add_brand') do
   name = params[:name]
   price = params[:price]
-  if name != "" && price != ""
-    new_brand = Brand.create({:name => name, :price => price})
+  new_brand = Brand.create({:name => name, :price => price})
+  if new_brand.save()
+    redirect('/')
+  else
+    @stores = Store.all()
+    @brands = Brand.all()
+    @errors_brand = new_brand.errors.full_messages
+    erb(:index)
   end
-  @stores = Store.all()
-  @brands = Brand.all()
-  erb(:index)
 end
 
 get('/stores/:id') do
@@ -42,7 +48,12 @@ patch('/stores/:id') do
   brand_ids = params.fetch("brand_ids", "")
   @store = Store.find(id)
   if name != ""
-    @store.update(:name => name)
+    if !@store.update(:name => name)
+      @errors_store = @store.errors.full_messages
+      @store = Store.find(id)
+      @brands = Brand.all() - @store.brands()
+      return erb(:store)
+    end
   end
 
   if brand_ids != ""
@@ -51,7 +62,7 @@ patch('/stores/:id') do
       @store.brands().push(brand)
     end
   end
-  @brands = Brand.all() - @store.brands()
+
   redirect('/stores/'.concat((@store.id).to_s))
 end
 

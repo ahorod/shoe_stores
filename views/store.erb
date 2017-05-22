@@ -38,6 +38,12 @@
         <button class="btn btn-danger" type="submit">Delete Store</button>
       </div>
     </form>
+    <br>
+    <% if @errors_store %>
+      <div class="alert alert-danger">
+        <strong><%= @errors_store.join(', ') %></strong>
+      </div>
+    <% end %>
   </div>
 
 </div>

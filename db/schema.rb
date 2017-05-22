@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20170515045131) do
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_brands_on_name", unique: true
   end
 
   create_table "brands_stores", force: :cascade do |t|
@@ -34,7 +33,6 @@ ActiveRecord::Schema.define(version: 20170515045131) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_stores_on_name", unique: true
   end
 
 end

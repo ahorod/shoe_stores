@@ -3,6 +3,7 @@ class Store < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :name, length: { maximum: 100 }
+  validates :name, uniqueness: { case_sensitive: false, message: "this store already exists" }
 
   before_save :capitalize_name
 

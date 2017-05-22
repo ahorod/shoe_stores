@@ -22,6 +22,12 @@
             <button class="btn btn-success" type="submit">Add Store</button>
           </div>
         </form>
+        <br>
+        <% if @errors_store %>
+          <div class="alert alert-danger">
+            <strong><%= @errors_store.join(', ') %></strong>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
@@ -52,6 +58,12 @@
             <button class="btn btn-warning" type="submit">Add Brand</button>
           </div>
         </form>
+        <br>
+        <% if @errors_brand %>
+          <div class="alert alert-danger">
+            <strong><%= @errors_brand.join(', ') %></strong>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
