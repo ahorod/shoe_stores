@@ -1,18 +1,23 @@
 
 <h1><%= @brand.name() %></h1>
 
-<form action="/brand_update/<%= @brand.id() %>" method="post">
+<form action="/brands/<%= @brand.id() %>" method="post">
   <input type="hidden" name="_method" value="patch">
   <label for="name">Name</label>
   <input type="text" name="name">
-
   <button class="btn btn-success"type="submit">Update brand</button>
 </form>
 
-<form action="/brand_delete/<%= @brand.id() %>" method="post">
+<form action="/brands/<%= @brand.id() %>" method="post">
     <input type="hidden" name="_method" value="delete">
     <button class="btn btn-danger"type="submit">Delete</button>
 </form>
+<br>
+<% if @errors_brand %>
+  <div class="alert alert-danger">
+    <strong><%= @errors_brand.join(', ') %></strong>
+  </div>
+<% end %>
 
 <% if @brand.stores().any?() %>
   <h3>Below are all of the stores where you can buy <%= @brand.name() %></h3>

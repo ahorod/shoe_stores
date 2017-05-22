@@ -70,9 +70,7 @@ delete('/stores/:id') do
   id = params.fetch('id').to_i
   @store = Store.find(id)
   @store.delete()
-  @stores = Store.all()
-  @brands = Brand.all()
-  erb(:index)
+  redirect('/')
 end
 
 get('/brands/:id') do
@@ -80,4 +78,25 @@ get('/brands/:id') do
   @brand = Brand.find(id)
   @stores = Store.all()
   erb(:brand)
+end
+
+delete('/brands/:id') do
+  id = params.fetch('id').to_i
+  @brand = Brand.find(id)
+  @brand.delete()
+  redirect('/')
+end
+
+patch('/brands/:id') do
+  id = params.fetch('id').to_i
+  name = params.fetch('name')
+  @brand = Brand.find(id)
+  if name != ""
+    if !@brand.update(:name => name)
+      @errors_brand= @brand.errors.full_messages
+      @brand = Brand.find(id)
+      return erb(:brand)
+    end
+  end
+  redirect('/brands/'.concat((@brand.id).to_s))
 end
